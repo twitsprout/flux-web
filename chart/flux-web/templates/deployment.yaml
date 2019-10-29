@@ -24,6 +24,10 @@ spec:
         - name: {{ include "flux-web.fullname" . }}-frontend
           image: "{{ .Values.frontend.repository }}:{{ .Values.frontend.tag }}"
           imagePullPolicy: {{ .Values.frontend.pullPolicy }}
+          {{- if .Values.frontend.command }}
+          command: 
+          {{ toYaml .Values.frontend.command }}
+          {{- end }}
           env:
           - name: APP_PORT
             value: '8080'
